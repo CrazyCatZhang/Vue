@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<h1>{{name}}</h1>
+	<h1>{{address}}</h1>
+</div>
+<script>
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el: '#root',
+        data() {
+            return {
+                name: 'cat',
+                address: 'Beijing'
+            }
+        }
+    })
+</script>
+</body>
+</html>
