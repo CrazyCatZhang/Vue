@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<h3>a的值是:{{ numbers.a }}</h3>
+	<button @click="numbers.a++">点我让a+1</button>
+	<h3>b的值是:{{ numbers.b }}</h3>
+	<button @click="numbers.b++">点我让b+1</button>
+	<button @click="numbers = {a:666,b:888}">彻底替换掉numbers</button>
+</div>
+
+<script>
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            numbers: {
+                a: 1,
+                b: 1,
+                c: {
+                    d: {
+                        e: 100
+                    }
+                }
+            }
+        },
+        watch: {
+            numbers: {
+                deep: true,
+                handler() {
+                    console.log('numbers被修改了')
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
+
+
+
+
