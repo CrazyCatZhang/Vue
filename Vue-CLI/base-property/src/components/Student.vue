@@ -5,6 +5,7 @@
 				<h2>学生性别：{{ sex }}</h2>
 				<h2>学生年龄：{{ myAge }}</h2>
 				<button @click="showName">点我显示名字</button>
+				<button @click="test">点我展示Hello</button>
 		</div>
 </template>
 
@@ -19,7 +20,12 @@ export default {
 				}
 		},
 		props: ['name', 'sex', 'age'],
-		mixins: [mixin]
+		mixins: [mixin],
+		methods: {
+				test() {
+						this.hello()
+				}
+		},
 }
 </script>
 
