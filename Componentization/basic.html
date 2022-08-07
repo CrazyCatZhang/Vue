@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<Hello></Hello>
+	<hr>
+	<Student></Student>
+	<hr>
+</div>
+
+<div id="root2">
+	<Hello></Hello>
+</div>
+
+<script>
+    Vue.config.productionTip = false
+
+    const Student = Vue.extend({
+        data() {
+            return {
+                studentName: 'CatZhang',
+                address: '杭州'
+            }
+        },
+        methods: {
+            showName() {
+                console.log(this.studentName)
+            }
+        },
+        template: `
+          <div>
+          <h3>学生名称：{{ studentName }}</h3>
+          <h3>学生地址：{{ address }}</h3>
+          <button @click="showName">点我展示名称</button>
+          </div>
+		`
+    })
+
+    const Hello = Vue.extend({
+        template: `
+	        <h2>Hello!!!!</h2>
+	    `,
+    })
+
+    Vue.component('Hello', Hello)
+
+    const vm = new Vue({
+        el: '#root',
+        components: {
+            Student
+        }
+    })
+
+    new Vue({
+        el: '#root2',
+    })
+</script>
+</body>
+</html>
