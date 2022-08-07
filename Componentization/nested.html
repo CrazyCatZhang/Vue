@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<App></App>
+</div>
+
+<script>
+    Vue.config.productionTip = false
+
+    const Student = {
+        data() {
+            return {
+                name: 'CatZhang',
+	            age: 18
+            }
+        },
+	    template: `
+	    	<div>
+		    	<h2>{{name}}</h2>
+		    	<h2>{{age}}</h2>
+		    </div>
+	    `
+    }
+
+    const Hello = {
+        data(){
+            return {
+                msg: 'Hello~~~~~'
+            }
+        },
+	    template: `
+	    	<div>
+		    	<h3>{{msg}}</h3>
+		    </div>
+	    `
+    }
+
+    const App = {
+        components: {
+            Student,
+	        Hello
+        },
+	    template: `
+		    <div>
+		    	<Hello></Hello>
+		    	<hr>
+		    	<Student></Student>
+		    </div>
+	    `
+    }
+
+    const vm = new Vue({
+        el: '#root',
+	    components: {
+            App
+	    }
+    })
+</script>
+</body>
+</html>
