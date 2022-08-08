@@ -1,17 +1,21 @@
 <template>
 		<div id="app">
 				<img alt="Vue logo" src="./assets/logo.png">
-				<Student :getStudentName="getStudentName" @demo="getStudentName2" ref="student" @click.native="output"/>
+				<Student :getStudentName="getStudentName" @demo="getStudentName2" ref="student"/>
+				<hr>
+				<School/>
 		</div>
 </template>
 
 <script>
 import Student from "@/components/Student";
+import School from "@/components/School";
 
 export default {
 		name: 'App',
 		components: {
-				Student
+				Student,
+				School
 		},
 		methods: {
 				getStudentName(val) {
@@ -19,9 +23,6 @@ export default {
 				},
 				getStudentName2(val) {
 						console.log('学生姓名为：', val)
-				},
-				output() {
-						alert('111111111')
 				}
 		},
 		mounted() {
