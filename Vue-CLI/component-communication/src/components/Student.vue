@@ -6,10 +6,13 @@
 				<button @click="sendStudentName2">点我传递姓名2</button>
 				<button @click="sendStudentName3">点我传递姓名3</button>
 				<button @click="sendStudentName4">点我传递姓名4</button>
+				<button @click="sendStudentName5">点我传递姓名5</button>
 		</div>
 </template>
 
 <script>
+import pubsub from "pubsub-js";
+
 export default {
 		data() {
 				return {
@@ -29,6 +32,9 @@ export default {
 				},
 				sendStudentName4() {
 						this.$bus.$emit('hello', this.name)
+				},
+				sendStudentName5() {
+						pubsub.publish('pub', this.name)
 				}
 		},
 		props: ['getStudentName']

@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
+
 export default {
 		data() {
 				return {
@@ -17,9 +19,14 @@ export default {
 				this.$bus.$on('hello', (data) => {
 						console.log('我是School组件，收到了数据：', data)
 				})
+				this.pid = pubsub.subscribe('pub', (msgName, data) => {
+						console.log(msgName)
+						console.log('我是School组件，收到了数据：', data)
+				})
 		},
 		beforeDestroy() {
 				this.$bus.off('hello')
+				pubsub.unsubscribe(this.pid)
 		}
 }
 </script>
