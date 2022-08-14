@@ -26,7 +26,7 @@ export default new VueRouter({
                     children: [
                         {
                             name: 'detail',
-                            path: 'detail',
+                            path: 'detail/:id/:title',
                             component: Detail
                         }
                     ]

@@ -4,7 +4,7 @@
             <li v-for="message of messageList" :key="message.id">
                 <router-link :to="{
                 name: 'detail',
-                query: {
+                params: {
                     id: message.id,
                     title: message.title
                 }
