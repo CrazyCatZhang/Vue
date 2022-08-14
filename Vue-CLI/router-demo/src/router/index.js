@@ -27,7 +27,13 @@ export default new VueRouter({
                         {
                             name: 'detail',
                             path: 'detail/:id/:title',
-                            component: Detail
+                            component: Detail,
+                            props({params}) {
+                                return {
+                                    id: params.id,
+                                    title: params.title
+                                }
+                            }
                         }
                     ]
                 }
