@@ -3,7 +3,7 @@
         <ul>
             <li v-for="message of messageList" :key="message.id">
                 <router-link :to="{
-                path: '/home/message/detail',
+                name: 'detail',
                 query: {
                     id: message.id,
                     title: message.title
