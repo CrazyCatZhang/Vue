@@ -21,7 +21,15 @@ const router = new VueRouter({
                 {
                     path: 'news',
                     component: News,
-                    meta: {title: '新闻', isAuth: true}
+                    meta: {title: '新闻', isAuth: true},
+                    beforeEnter(to, from, next) {
+                        console.log('独享路由守卫', to, from)
+                        if (localStorage.getItem('name') === 'CatZhang') {
+                            next()
+                        } else {
+                            alert('用户没有权限')
+                        }
+                    }
                 },
                 {
                     path: 'message',
