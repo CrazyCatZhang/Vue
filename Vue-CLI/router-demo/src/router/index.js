@@ -1,7 +1,9 @@
 import VueRouter from 'vue-router'
 
-import About from "@/components/About";
-import Home from "@/components/Home";
+import About from "@/pages/About";
+import Home from "@/pages/Home";
+import News from "@/pages/News";
+import Message from "@/pages/Message";
 
 export default new VueRouter({
     routes: [
@@ -11,7 +13,17 @@ export default new VueRouter({
         },
         {
             path: '/home',
-            component: Home
+            component: Home,
+            children: [
+                {
+                    path: 'news',
+                    component: News
+                },
+                {
+                    path: 'message',
+                    component: Message
+                }
+            ]
         }
     ]
 })
