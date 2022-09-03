@@ -16,6 +16,7 @@ export default function usePoint() {
 
     //生命周期
     onMounted(() => {
+        console.log('Point!!!!!')
         window.addEventListener('click', savePoint)
     });
 
