@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<div id="container"></div>
+<script src="/bundle.js"></script>
+<script>
+    // 模板字符串
+    const templateStr = `
+		<div>
+			<ul>
+				{{#students}}
+				<li class="hobbies">
+					学生{{name}}的爱好
+					<ul>
+						{{#hobbies}}
+						<li>{{.}}</li>
+						{{/hobbies}}
+					</ul>
+				</li>
+				{{/students}}
+			</ul>
+		</div>
+	`
+
+    const data = {
+        students: [
+            {name: '小明', hobbies: ['游戏', '打球']},
+            {name: '小强', hobbies: ['吃饭', '睡觉']},
+            {name: '小王', hobbies: ['打豆豆', '游泳']}
+        ]
+    }
+
+    const domStr = SSG_TemplateEngine.render(templateStr, data)
+    const container = document.getElementById('container')
+    container.innerHTML = domStr
+</script>
+</body>
+</html>
