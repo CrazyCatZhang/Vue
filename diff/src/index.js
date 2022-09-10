@@ -1,11 +1,13 @@
 import h from "./module/h";
+import patch from "./module/patch";
 
-const vNode = h('div', {}, [
-    h('p', {}, '哈哈'),
-    h('p', {}, '嘻嘻'),
-    h('p', {}, '呵呵'),
-    h('p', {}, '嘿嘿'),
-    h('p', {}, h('span', {}, 'text'))
+const vNode = h('ul', {}, [
+    h('li', {}, '哈哈'),
+    h('li', {}, '嘻嘻'),
+    h('li', {}, '呵呵'),
+    h('li', {}, '嘿嘿'),
+    h('li', {}, h('span', {}, 'text'))
 ])
 
-console.log(vNode)
+const container = document.getElementById('container')
+patch(container, vNode)
