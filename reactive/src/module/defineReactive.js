@@ -1,17 +1,19 @@
 import observe from "./observe";
+import Dep from "./Dep";
 
 export default function defineReactive(data, key, value = data[key]) {
+    const dep = new Dep()
     observe(value)
     Object.defineProperty(data, key, {
         get() {
-            console.log(key + '的value被获取了')
+            dep.depend()
             return value
         },
         set(newValue) {
             if (value === newValue) return
-            console.log(key + '的value被修改了')
             value = newValue
             observe(newValue)
+            dep.notify()
         }
     })
 }

@@ -15,5 +15,6 @@ module.exports = {
         port: 8080,
         // 静态资源文件夹
         contentBase: 'page'
-    }
+    },
+    devtool: 'inline-source-map'
 };
