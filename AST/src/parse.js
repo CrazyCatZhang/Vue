@@ -1,3 +1,5 @@
+import parseAttribute from "./parseAttribute";
+
 export default function (templateString) {
     let index = 0
     let rest = ''
@@ -18,9 +20,11 @@ export default function (templateString) {
         rest = templateString.substring(index)
         if (startTagRegExp.test(rest)) {
             const startTag = rest.match(startTagRegExp)[1]
+            const attrString = rest.match(startTagRegExp)[2]
             stack1.push(startTag)
-            stack2.push({tag: startTag, children: []})
-            index += startTag.length + 2
+            stack2.push({tag: startTag, children: [], attr: parseAttribute(attrString)})
+            const attrLength = attrString ? attrString.length : 0
+            index += startTag.length + attrLength + 2
         } else if (endTagRegExp.test(rest)) {
             const endTag = rest.match(endTagRegExp)[1]
             const pop_tag = stack1.pop()

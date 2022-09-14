@@ -1,7 +1,7 @@
 import parse from "./parse";
 
 const templateString = `
-    <div>
+    <div class="test" id="test">
         <h3>你好</h3>
         <ul>
             <li>A</li>
