@@ -12,17 +12,25 @@ export default function (templateString) {
     const stack1 = []
     const stack2 = []
 
+    let result
+
     while (index < templateString.length - 1) {
         rest = templateString.substring(index)
         if (startTagRegExp.test(rest)) {
             const startTag = rest.match(startTagRegExp)[1]
             stack1.push(startTag)
-            stack2.push([])
+            stack2.push({tag: startTag, children: []})
             index += startTag.length + 2
         } else if (endTagRegExp.test(rest)) {
             const endTag = rest.match(endTagRegExp)[1]
-            if (endTag === stack1[stack1.length - 1]) {
-                stack1.pop()
+            const pop_tag = stack1.pop()
+            if (endTag === pop_tag) {
+                const pop_arr = stack2.pop()
+                if (stack2.length) {
+                    stack2[stack2.length - 1].children.push(pop_arr)
+                } else {
+                    result = pop_arr
+                }
             } else {
                 throw new Error(`${stack1[stack1.length - 1]}标签没有闭合`)
             }
@@ -30,11 +38,15 @@ export default function (templateString) {
         } else if (wordRegExp.test(rest)) {
             const words = rest.match(wordRegExp)[1]
             if (!/^\s+$/.test(words)) {
-                console.log(words)
+                stack2[stack2.length - 1].children.push({
+                    text: words,
+                    type: 3
+                })
             }
             index += words.length
         } else {
             index++
         }
     }
+    return result
 }

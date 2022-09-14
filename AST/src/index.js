@@ -11,4 +11,5 @@ const templateString = `
     </div>
 `
 
-parse(templateString)
+const result = parse(templateString)
+console.log(result)
