@@ -5,11 +5,10 @@ const vm = new Vue({
         return {
             name: 'Cat',
             age: 18,
-            hobby: ['eat','code','play']
+            hobby: ['eat', 'code', 'play']
         }
-    }
+    },
+    el: '#app'
 })
 
-console.log(vm)
 
-vm.hobby.push(1)
