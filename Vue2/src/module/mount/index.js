@@ -1,4 +1,5 @@
 import {createElementVNode, createTextVNode} from "../vdom";
+import Watcher from "../observe/Watcher";
 
 function createElement(vnode) {
     const {tag, data, children, text} = vnode
@@ -34,6 +35,8 @@ function patch(oldVNode, newVNode) {
         const newElement = createElement(newVNode)
         parent.insertBefore(newElement, oldVNode)
         parent.removeChild(oldVNode)
+
+        return newElement
     } else {
 
     }
@@ -48,7 +51,7 @@ export function lifecycle(Vue) {
         const vm = this
         const el = vm.$el
 
-        patch(el, vnode)
+        vm.$el = patch(el, vnode)
     }
 
     Vue.prototype._c = function () {
@@ -67,5 +70,8 @@ export function lifecycle(Vue) {
 
 export default function mountComponent(vm, el) {
     vm.$el = el
-    vm._update(vm._render())
+    const updateComponent = () => {
+        vm._update(vm._render())
+    }
+    const watcher = new Watcher(vm, updateComponent);
 }
