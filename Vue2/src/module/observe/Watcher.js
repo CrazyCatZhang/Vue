@@ -1,4 +1,5 @@
 import {popTarget, pushTarget} from "./Dep";
+import {queueWatchers} from "./asynchronous";
 
 let id = 0
 
@@ -19,7 +20,7 @@ export default class Watcher {
     }
 
     update() {
-        this.callback()
+        queueWatchers(this)
     }
 
     addDep(dep) {
@@ -31,4 +32,7 @@ export default class Watcher {
         }
     }
 
+    run() {
+        this.get()
+    }
 }

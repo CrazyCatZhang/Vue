@@ -11,7 +11,7 @@ const vm = new Vue({
     el: '#app'
 })
 
-setTimeout(() => {
-    vm.age = 20
-    vm.name = 'CatZhang'
-}, 1000)
+vm.name = 'CatZhang'
+vm.$nextTick(() => {
+    console.log(app.innerHTML)
+})
