@@ -1,4 +1,5 @@
 import initMixin from "./initialize/init";
+import {lifecycle} from "./mount";
 
 export default class Vue {
     constructor(options) {
@@ -8,3 +9,4 @@ export default class Vue {
 }
 
 initMixin(Vue)
+lifecycle(Vue)
