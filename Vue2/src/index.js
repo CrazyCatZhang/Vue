@@ -11,7 +11,7 @@ const vm = new Vue({
         return {
             name: 'Cat',
             age: 18,
-            hobby: ['eat', 'code', 'play']
+            hobby: ['eat', 'code', 'play', ['1', '2']]
         }
     },
     el: '#app',
@@ -19,3 +19,7 @@ const vm = new Vue({
         console.log('created')
     }
 })
+
+setTimeout(() => {
+    vm.hobby[3].push('3')
+}, 1000)
