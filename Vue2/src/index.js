@@ -1,5 +1,11 @@
 import Vue from './module/Vue'
 
+Vue.mixin({
+    created() {
+        console.log('mixin created')
+    }
+})
+
 const vm = new Vue({
     data() {
         return {
@@ -8,10 +14,8 @@ const vm = new Vue({
             hobby: ['eat', 'code', 'play']
         }
     },
-    el: '#app'
-})
-
-vm.name = 'CatZhang'
-vm.$nextTick(() => {
-    console.log(app.innerHTML)
+    el: '#app',
+    created() {
+        console.log('created')
+    }
 })
