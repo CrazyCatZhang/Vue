@@ -1,46 +1,6 @@
 import {createElementVNode, createTextVNode} from "../vdom";
 import Watcher from "../observe/Watcher";
-
-function createElement(vnode) {
-    const {tag, data, children, text} = vnode
-    if (typeof tag === 'string') {
-        vnode.el = document.createElement(tag)
-        patchProps(vnode.el, data)
-        children && children.forEach(child => {
-            vnode.el.appendChild(createElement(child))
-        })
-    } else {
-        vnode.el = document.createTextNode(text)
-    }
-
-    return vnode.el
-}
-
-function patchProps(el, data) {
-    for (let dataKey in data) {
-        if (dataKey === 'style') {
-            for (let styleName in data.style) {
-                el.style[styleName] = data.style[styleName]
-            }
-        } else {
-            el.setAttribute(dataKey, data[dataKey])
-        }
-    }
-}
-
-function patch(oldVNode, newVNode) {
-    const isRealElement = oldVNode.nodeType
-    if (isRealElement) {
-        const parent = oldVNode.parentNode
-        const newElement = createElement(newVNode)
-        parent.insertBefore(newElement, oldVNode)
-        parent.removeChild(oldVNode)
-
-        return newElement
-    } else {
-
-    }
-}
+import patch from "../vdom/patch";
 
 export function lifecycle(Vue) {
     Vue.prototype._render = function () {

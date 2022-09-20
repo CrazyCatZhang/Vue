@@ -10,6 +10,10 @@ export default function initMixin(Vue) {
         callHook(this, 'beforeCreate')
         initState(vm)
         callHook(this, 'created')
+
+        if (options.el) {
+            vm.$mount(options.el)
+        }
     }
 
     Vue.prototype.$mount = function (el) {

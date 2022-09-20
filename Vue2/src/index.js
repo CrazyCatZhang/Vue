@@ -1,25 +1,21 @@
 import Vue from './module/Vue'
+import compileToFunction from "./module/compiler";
+import {createElement} from "./module/vdom/patchVNode";
+import patch from "./module/vdom/patch";
 
-const vm = new Vue({
-    data() {
-        return {
-            firstName: 'Cat',
-            lastName: 'Zhang'
-        }
-    },
-    el: '#app',
-    watch: {
-        firstName(newValue, oldValue) {
-            console.log(newValue, oldValue)
-        }
-    },
-    computed: {
-        fullName() {
-            return this.firstName + this.lastName
-        }
-    }
-})
+
+let render1 = compileToFunction(`<div>{{name}}</div>`)
+let vm1 = new Vue({data: {name: 'CatZhang'}})
+let prevVNode = render1.call(vm1)
+
+let el = createElement(prevVNode);
+document.getElementById('app').appendChild(el)
+
+
+let render2 = compileToFunction(`<div>{{name}}</div>`);
+let vm2 = new Vue({data: {name: 'PeachZhang'}})
+let nextVNode = render2.call(vm2);
 
 setTimeout(() => {
-    vm.firstName = 'Peach'
+    patch(prevVNode, nextVNode)
 }, 1000)
