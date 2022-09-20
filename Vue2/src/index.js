@@ -9,17 +9,22 @@ Vue.mixin({
 const vm = new Vue({
     data() {
         return {
-            name: 'Cat',
-            age: 18,
-            hobby: ['eat', 'code', 'play', ['1', '2']]
+            firstName: 'Cat',
+            lastName: 'Zhang'
         }
     },
     el: '#app',
     created() {
         console.log('created')
+    },
+    computed: {
+        fullName() {
+            console.log('run')
+            return this.firstName + this.lastName
+        }
     }
 })
 
 setTimeout(() => {
-    vm.hobby[3].push('3')
-}, 1000)
+    vm.firstName = 'Peach'
+},1000)

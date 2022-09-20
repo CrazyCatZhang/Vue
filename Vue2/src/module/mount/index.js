@@ -73,7 +73,7 @@ export default function mountComponent(vm, el) {
     const updateComponent = () => {
         vm._update(vm._render())
     }
-    const watcher = new Watcher(vm, updateComponent);
+    const watcher = new Watcher(vm, updateComponent, true);
 }
 
 export function callHook(vm, hook) {
