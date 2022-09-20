@@ -3,13 +3,15 @@ import Watcher from "../observe/Watcher";
 import Dep from "../observe/Dep";
 
 export default function initState(vm) {
-    const data = vm.$options.data
-    const computed = vm.$options.computed
+    const {data, computed, watch} = vm.$options
     if (data) {
         initData(vm)
     }
     if (computed) {
         initComputed(vm)
+    }
+    if (watch) {
+        initWatch(vm)
     }
 }
 
@@ -66,6 +68,27 @@ function createComputedGetter(key) {
         }
         return watcher.value
     }
+}
+
+function initWatch(vm) {
+    const watch = vm.$options.watch
+    for (const watchKey in watch) {
+        const handler = watch[watchKey]
+        if (Array.isArray(handler)) {
+            for (const handlerKey in handler) {
+                createWatcher(vm, watchKey, handler[handlerKey])
+            }
+        } else {
+            createWatcher(vm, watchKey, handler)
+        }
+    }
+}
+
+function createWatcher(vm, key, handler) {
+    if (typeof handler === 'string') {
+        handler = vm[handler]
+    }
+    return vm.$watch(key, handler)
 }
 
 

@@ -4,15 +4,27 @@ import {queueWatchers} from "./asynchronous";
 let id = 0
 
 export default class Watcher {
-    constructor(vm, callback, options) {
+    constructor(vm, expressionOrFn, options, callback) {
         this.vm = vm
         this.id = id++
-        this.callback = callback
         this.renderWatch = options
+
+        if (typeof expressionOrFn === "string") {
+            this.getter = function () {
+                return vm[expressionOrFn]
+            }
+        } else {
+            this.getter = expressionOrFn
+        }
+        this.callback = callback
+        this.user = options.user
+
         this.deps = []
         this.depsId = new Set()
+
         this.lazy = options.lazy
         this.dirty = this.lazy
+
         this.value = this.lazy ? undefined : this.get()
     }
 
@@ -29,7 +41,7 @@ export default class Watcher {
 
     get() {
         pushTarget(this)
-        const value = this.callback.call(this.vm)
+        const value = this.getter.call(this.vm)
         popTarget()
         return value
     }
@@ -52,6 +64,10 @@ export default class Watcher {
     }
 
     run() {
-        this.get()
+        const oldValue = this.value
+        const newValue = this.get()
+        if (this.user) {
+            this.callback.call(this.vm, newValue, oldValue)
+        }
     }
 }

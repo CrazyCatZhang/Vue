@@ -1,11 +1,5 @@
 import Vue from './module/Vue'
 
-Vue.mixin({
-    created() {
-        console.log('mixin created')
-    }
-})
-
 const vm = new Vue({
     data() {
         return {
@@ -14,12 +8,13 @@ const vm = new Vue({
         }
     },
     el: '#app',
-    created() {
-        console.log('created')
+    watch: {
+        firstName(newValue, oldValue) {
+            console.log(newValue, oldValue)
+        }
     },
     computed: {
         fullName() {
-            console.log('run')
             return this.firstName + this.lastName
         }
     }
@@ -27,4 +22,4 @@ const vm = new Vue({
 
 setTimeout(() => {
     vm.firstName = 'Peach'
-},1000)
+}, 1000)
