@@ -1,8 +1,23 @@
 import {isSameVNode} from "./index";
 
+function createComponent(vnode) {
+    let i = vnode.data
+    if ((i = i.hook) && (i = i.init)) {
+        i(vnode)
+    }
+    if (vnode.componentInstance) {
+        return true
+    }
+}
+
 export function createElement(vnode) {
     const {tag, data, children, text} = vnode
     if (typeof tag === 'string') {
+
+        if (createComponent(vnode)) {
+            return vnode.componentInstance.$el
+        }
+
         vnode.el = document.createElement(tag)
         patchProps(vnode.el, {}, data)
         children && children.forEach(child => {

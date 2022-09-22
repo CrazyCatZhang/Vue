@@ -2,7 +2,6 @@ import observe from "../observe";
 import Watcher from "../observe/Watcher";
 import Dep from "../observe/Dep";
 import {nextTick} from "../observe/asynchronous";
-import Vue from "../Vue";
 
 export default function initState(vm) {
     const {data, computed, watch} = vm.$options

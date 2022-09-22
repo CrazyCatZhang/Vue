@@ -1,6 +1,10 @@
 import patchVNode, {createElement} from "./patchVNode";
 
 export default function patch(oldVNode, newVNode) {
+    if (!oldVNode) {
+        return createElement(newVNode)
+    }
+
     const isRealElement = oldVNode.nodeType
     if (isRealElement) {
         const parent = oldVNode.parentNode
